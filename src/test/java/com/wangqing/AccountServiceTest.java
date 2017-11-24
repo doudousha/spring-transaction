@@ -1,8 +1,10 @@
 package com.wangqing;
 
 
-import com.AccountService;
 import com.entitys.Account;
+import com.mappers.AccountMapper;
+
+import com.service.AccountService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,18 @@ public class AccountServiceTest {
     private AccountService accountService ;
 
 
+    @Autowired
+    private AccountMapper  accountMapper ;
+
     @Test
     public void transfer_test() {
-
-        Account inAccount = null;
-        Account outAccount = null ;
-
+        Account inAccount = accountMapper.selectByPrimaryKey(1L);
+        Account outAccount = accountMapper.selectByPrimaryKey(2L);
         accountService.transfer(inAccount,outAccount ,20);
+    }
+
+    @Test
+    public void test() {
+        System.out.println(accountMapper==null);
     }
 }

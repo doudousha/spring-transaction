@@ -30,7 +30,7 @@
 
     <context:property-placeholder location="classpath:conf/settings/*.properties"></context:property-placeholder>
 
-    <context:component-scan base-package="com"></context:component-scan>
+    <context:component-scan base-package="com.service"></context:component-scan>
 
 
     <!-- 数据源 -->
@@ -74,9 +74,6 @@
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:/conf/settings/mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath:/conf/mapper/*Mapper.xml" />
-
-        <property name="typeAliasesPackage" value="com.mengdee.manager.domain" />
-
     </bean>
     <!-- 配置SqlSessionTemplate -->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -85,7 +82,11 @@
     <!-- 配置mybatis mapper接口 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.mappers"/>
-        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <bean class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"></property>
     </bean>
 
     <!-- 事务配置 -->

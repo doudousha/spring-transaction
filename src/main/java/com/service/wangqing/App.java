@@ -1,4 +1,4 @@
-package com.wangqing;
+package com.service.wangqing;
 
 /**
  * Hello world!
